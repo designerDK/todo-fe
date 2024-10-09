@@ -114,9 +114,3 @@ document.getElementById("post-btn").addEventListener("click", () => {
         .catch((error) => console.error("Error:", error));
 });
 
-if(document.getElementById("todo-list") === null){
-    document.getElementById("todo-list").innerHTML = `
-        <p>할 일 목록이 없습니다.</p>
-    `;
-}
-
