@@ -1,5 +1,7 @@
+const uri = "https://port-0-todo-app-m23hc1qu8337e38b.sel4.cloudtype.app";
+
 function getTasks() {
-    fetch("http://localhost:5001/tasks")
+    fetch(`${uri}/tasks`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
@@ -39,7 +41,7 @@ function getTasks() {
                 completeBTN.addEventListener("click", () => {
                     let changeComplete = completeBTN.value === "완료하기" ? true : false;
 
-                    fetch(`http://localhost:5001/tasks/${item._id}`, {
+                    fetch(`${uri}/tasks/${item._id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -60,7 +62,7 @@ function getTasks() {
 
                 // 삭제 버튼 이벤트 리스너 추가
                 deleteBTN.addEventListener("click", () => {
-                    fetch(`http://localhost:5001/tasks/${item._id}`, {
+                    fetch(`${uri}/tasks/${item._id}`, {
                         method: "DELETE",
                     })
                         .then((response) => response.json())
@@ -91,7 +93,7 @@ document.getElementById("post-btn").addEventListener("click", () => {
     }
 
     // POST 요청
-    fetch("http://localhost:5001/tasks", {
+    fetch(`${uri}/tasks`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
