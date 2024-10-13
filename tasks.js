@@ -1,3 +1,12 @@
+window.onload = function() {
+    const token = sessionStorage.getItem('token');
+
+    // 토큰이 없으면 로그인 페이지로 리다이렉션
+    if (!token) {
+        window.location.href = 'login.html';
+    }
+};
+
 const PROD_URI = "https://port-0-todo-app-m23hc1qu8337e38b.sel4.cloudtype.app";
 const LOCAL_URI = "http://localhost:5001";
 
@@ -26,6 +35,7 @@ function getTasks() {
                 const todoCard = `
                 <div class="todo-card" id="todo-task${i}">
                     <p>${item.task}</p>
+                    <p>${item.author.name}</p>
                     <span>
                         <input type="button" id="is-complete${i}" value="">
                         <input type="button" id="delete-btn${i}" value="삭제">
@@ -100,6 +110,7 @@ document.getElementById("post-btn").addEventListener("click", () => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("token")}` // 토큰을 Bearer 토큰으로 설정
         },
         body: JSON.stringify({
             task: inputValue,
