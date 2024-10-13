@@ -1,7 +1,10 @@
-const uri = "https://port-0-todo-app-m23hc1qu8337e38b.sel4.cloudtype.app";
+const PROD_URI = "https://port-0-todo-app-m23hc1qu8337e38b.sel4.cloudtype.app";
+const LOCAL_URI = "http://localhost:5001";
+
+const URI = LOCAL_URI;
 
 function getTasks() {
-    fetch(`${uri}/tasks`)
+    fetch(`${URI}/tasks`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
@@ -41,7 +44,7 @@ function getTasks() {
                 completeBTN.addEventListener("click", () => {
                     let changeComplete = completeBTN.value === "완료하기" ? true : false;
 
-                    fetch(`${uri}/tasks/${item._id}`, {
+                    fetch(`${URI}/tasks/${item._id}`, {
                         method: "PUT",
                         headers: {
                             "Content-Type": "application/json",
@@ -62,7 +65,7 @@ function getTasks() {
 
                 // 삭제 버튼 이벤트 리스너 추가
                 deleteBTN.addEventListener("click", () => {
-                    fetch(`${uri}/tasks/${item._id}`, {
+                    fetch(`${URI}/tasks/${item._id}`, {
                         method: "DELETE",
                     })
                         .then((response) => response.json())
@@ -93,7 +96,7 @@ document.getElementById("post-btn").addEventListener("click", () => {
     }
 
     // POST 요청
-    fetch(`${uri}/tasks`, {
+    fetch(`${URI}/tasks`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -116,3 +119,8 @@ document.getElementById("post-btn").addEventListener("click", () => {
         .catch((error) => console.error("Error:", error));
 });
 
+//로그아웃
+document.getElementById('logout-btn').addEventListener('click', () => {
+    sessionStorage.removeItem('token'); // 토큰 삭제
+    window.location.href = 'login.html'; // 로그인 페이지로 리다이렉션
+});
